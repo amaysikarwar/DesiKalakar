@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desi Kalakaar</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    color: white;
+    background:
+        linear-gradient(rgba(10, 18, 25, 0.82), rgba(10, 18, 25, 0.88)),
+        url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1800&q=85")
+        center/cover fixed;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 7px 0 14px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: white;
+    color: #222;
+}
+
+textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+button, .button {
+    border: none;
+    padding: 12px 17px;
+    border-radius: 7px;
+    background: #f5a623;
+    color: #17202a;
+    font-weight: bold;
+}
+
+button:hover, .button:hover {
+    background: #ffd166;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 30px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #222;
+    box-shadow: 0 10px 35px #0008;
+}
+
+.login-card h1 {
+    margin: 15px 0 8px;
+    color: #17202a;
+}
+
+.login-card p {
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+.login-card label, .panel label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.login-card .brand {
+    justify-content: center;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.brand svg {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+}
+
+.small-note {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 7px;
+    background: #fff1cc;
+    color: #5d4200;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 17px 5%;
+    background: rgba(12, 20, 27, 0.94);
+    border-bottom: 2px solid #f5a623;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.header-actions select {
+    width: auto;
+    min-width: 145px;
+    margin: 0;
+}
+
+header button {
+    padding: 10px 13px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+nav button {
+    background: rgba(255, 255, 255, 0.13);
+    color: white;
+    border: 1px solid #ffffff55;
+}
+
+nav button.active {
+    background: #f5a623;
+    color: #17202a;
+}
+
+main {
+    max-width: 1100px;
+    width: 92%;
+    margin: 35px auto;
+    min-height: 65vh;
+}
+
+.hero {
+    text-align: center;
+    padding: 45px 15px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-bottom: 15px;
+}
+
+.hero p {
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto 24px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.panel, .action-card, .worker-card, .job-card {
+    padding: 23px;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #222;
+    box-shadow: 0 6px 22px #0004;
+}
+
+.action-card h3, .panel h2 {
+    margin-bottom: 12px;
+}
+
+.action-card p {
+    line-height: 1.6;
+    margin-bottom: 17px;
+    color: #555;
+}
+
+.panel {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.panel h2 {
+    color: #17202a;
+    margin-bottom: 20px;
+}
+
+.panel button {
+    margin: 3px 4px 3px 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0 16px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.worker-card h3, .job-card h3 {
+    margin-bottom: 10px;
+    color: #17202a;
+}
+
+.worker-card p, .job-card p {
+    margin: 7px 0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.worker-card button, .job-card button {
+    margin-top: 12px;
+}
+
+.qr-image {
+    display: block;
+    width: 160px;
+    max-width: 100%;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background: white;
+}
+
+footer {
+    text-align: center;
+    padding: 22px 10px;
+    background: rgba(12, 20, 27, 0.94);
+    color: #ddd;
+    line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+    header {
+        justify-content: center;
+    }
+
+    .header-actions {
+        justify-content: center;
+    }
+
+    .header-actions select {
+        max-width: 100%;
+    }
+
+    .login-card {
+        padding: 22px;
+    }
+
+    main {
+        margin: 20px auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN IS THE ONLY SCREEN VISIBLE AT FIRST -->
+<section id="loginScreen" class="login-screen">
+    <div class="login-card">
+
+        <a href="#" class="brand" aria-label="Desi Kalakaar">
+            <svg viewBox="0 0 100 100" role="img" aria-label="Worker logo">
+                <circle cx="50" cy="50" r="48" fill="#17202a"/>
+                <path d="M19 39 L50 20 L81 39 Z" fill="#f5a623"/>
+                <path d="M27 40 Q50 31 73 40 L70 48 Q50 42 30 48 Z" fill="#ffd166"/>
+                <circle cx="50" cy="51" r="14" fill="#f5a623"/>
+                <path d="M22 83 Q23 64 40 63 L60 63 Q77 64 78 83 Z" fill="#f5a623"/>
+                <path d="M41 66 L50 77 L59 66" fill="none" stroke="#17202a" stroke-width="4"/>
+            </svg>
+            <span>Desi Kalakaar</span>
+        </a>
+
+        <h1 data-i18n="loginTitle">Welcome!</h1>
+        <p data-i18n="loginSubtitle">
+            Register your mobile number and verify the OTP to enter the app.
+        </p>
+
+        <form id="mobileForm">
+            <label for="mobile" data-i18n="mobileLabel">Mobile Number</label>
+            <input id="mobile" type="tel" inputmode="numeric"
+                   maxlength="10" pattern="[0-9]{10}"
+                   placeholder="Enter 10-digit mobile number" required>
+
+            <label for="loginPin">4-digit PIN</label>
+            <input id="loginPin" type="password" inputmode="numeric" maxlength="4"
+                   pattern="[0-9]{4}" placeholder="Enter your 4-digit PIN" required>
+            <button type="submit" id="generateOtp">Login</button>
+            <p style="margin-top:12px;font-size:0.9rem">New worker? Fill your details in “Register as Worker” after opening the app is not possible yet. Use the worker registration option below to create an account.</p>
+        </form>
+
+        <details style="margin-top:18px;text-align:left">
+            <summary style="cursor:pointer;font-weight:bold">Create worker account</summary>
+            <form id="signupForm" style="margin-top:12px">
+                <label for="signupName">Full name</label><input id="signupName" required maxlength="60">
+                <label for="signupTrade">Profession / trade</label><input id="signupTrade" required maxlength="30">
+                <label for="signupCity">City</label><input id="signupCity" required maxlength="40">
+                <label for="signupYears">Experience (years)</label><input id="signupYears" type="number" min="0" max="60" value="0" required>
+                <label for="signupPhone">Mobile number</label><input id="signupPhone" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required>
+                <label for="signupPin">Choose 4-digit PIN</label><input id="signupPin" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required>
+                <button type="submit">Create account</button>
+            </form>
+        </details>
+
+        <div id="loginMessage" class="message hidden" aria-live="polite"></div>
+    </div>
+</section>
+
+<!-- EVERYTHING BELOW IS LOCKED UNTIL OTP VERIFICATION -->
+<div id="app" class="hidden">
+
+    <header>
+        <a href="#" class="brand" onclick="showPage('home'); return false;">
+            <svg viewBox="0 0 100 100" aria-label="Desi Kalakaar logo">
+                <circle cx="50" cy="50" r="48" fill="#f5a623"/>
+                <path d="M19 39 L50 20 L81 39 Z" fill="#17202a"/>
+                <path d="M27 40 Q50 31 73 40 L70 48 Q50 42 30 48 Z" fill="#fff"/>
+                <circle cx="50" cy="51" r="14" fill="#17202a"/>
+                <path d="M22 83 Q23 64 40 63 L60 63 Q77 64 78 83 Z" fill="#17202a"/>
+            </svg>
+            <span>Desi Kalakaar</span>
+        </a>
+
+        <div class="header-actions">
+            <select id="languageSelect" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="kn">ಕನ್ನಡ</option>
+                <option value="te">తెలుగు</option>
+                <option value="ta">தமிழ்</option>
+                <option value="ml">മലയാളം</option>
+                <option value="mr">मराठी</option>
+                <option value="bn">বাংলা</option>
+                <option value="gu">ગુજરાતી</option>
+                <option value="pa">ਪੰਜਾਬੀ</option>
+                <option value="ur">اردو</option>
+                <option value="or">ଓଡ଼ିଆ</option>
+            </select>
+            <button onclick="logout()" data-i18n="logout">Logout</button>
+        </div>
+    </header>
+
+    <nav>
+        <button class="active" data-page="home" onclick="showPage('home')" data-i18n="home">Home</button>
+        <button data-page="find" onclick="showPage('find')" data-i18n="findWorkers">Find Workers</button>
+        <button data-page="register" onclick="showPage('register')" data-i18n="registerWorker">Register as Worker</button>
+        <button data-page="jobs" onclick="showPage('jobs')" data-i18n="jobsNear">Jobs Near Me</button>
+    </nav>
+
+    <main>
+        <!-- HOME -->
+        <section id="homePage" class="page">
+            <div class="hero">
+                <h1 data-i18n="welcome">Find Skilled Workers Near You</h1>
+                <p data-i18n="welcomeText">
+                    Connect with local painters, carpenters, electricians,
+                    tailors, plumbers and other skilled workers.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h2 data-i18n="quickSearch">Quick Search</h2>
+                <form id="quickSearchForm">
+                    <label for="quickQuery" data-i18n="searchLabel">What are you looking for?</label>
+                    <input id="quickQuery" data-placeholder="quickPlaceholder"
+                           placeholder="Enter a worker type, skill or job">
+                    <label for="quickLocation" data-i18n="locationLabel">Location</label>
+                    <input id="quickLocation" data-placeholder="locationPlaceholder"
+                           placeholder="Enter city or area">
+                    <button type="submit" data-i18n="search">Search</button>
+                </form>
+            </div>
+
+            <div class="action-grid">
+                <div class="action-card">
+                    <h3 data-i18n="findWorkers">Find Workers</h3>
+                    <p data-i18n="findDesc">Search local workers by profession, skill and location.</p>
+                    <button onclick="showPage('find')" data-i18n="searchWorkers">Search Workers</button>
+                </div>
+
+                <div class="action-card">
+                    <h3 data-i18n="registerWorker">Register as Worker</h3>
+                    <p data-i18n="registerDesc">Create a worker profile and generate a QR code.</p>
+                    <button onclick="showPage('register')" data-i18n="createProfile">Create Profile</button>
+                </div>
+
+                <div class="action-card">
+                    <h3 data-i18n="jobsNear">Jobs Near Me</h3>
+                    <p data-i18n="jobsDesc">Find local work or publish a job for workers.</p>
+                    <button onclick="showPage('jobs')" data-i18n="viewJobs">View Jobs</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FIND WORKERS -->
+        <section id="findPage" class="page hidden">
+            <div class="panel">
+                <h2 data-i18n="findWorkers">Find Workers</h2>
+
+                <form id="workerSearchForm">
+                    <div class="form-grid">
+                        <div>
+                            <label for="workerType" data-i18n="professionLabel">Worker Type</label>
+                            <select id="workerType">
+                                <option value="" data-i18n="allTypes">All types</option>
+                                <option>Painter</option>
+                                <option>Carpenter</option>
+                                <option>Electrician</option>
+                                <option>Tailor</option>
+                                <option>Plumber</option>
+                                <option>Mason</option>
+                                <option>Mechanic</option>
+                                <option>Welder</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="workerQuery" data-i18n="nameSkillLabel">Name or Skill</label>
+                            <input id="workerQuery" data-placeholder="nameSkillPlaceholder"
+                                   placeholder="Search name or skill">
+                        </div>
+                        <div>
+                            <label for="workerLocation" data-i18n="locationLabel">Location</label>
+                            <input id="workerLocation" data-placeholder="locationPlaceholder"
+                                   placeholder="Enter city or area">
+                        </div>
+                        <div>
+                            <label for="minExperience" data-i18n="experienceLabel">Minimum Experience (years)</label>
+                            <input id="minExperience" type="number" min="0"
+                                   data-placeholder="experiencePlaceholder"
+                                   placeholder="For example: 2">
+                        </div>
+                    </div>
+                    <button type="submit" data-i18n="search">Search</button>
+                    <button type="button" onclick="renderWorkers()" data-i18n="showAll">Show All</button>
+                </form>
+
+                <p id="workerCount" class="message" aria-live="polite"></p>
+            </div>
+
+            <div id="workerResults" class="result-grid"></div>
+        </section>
+
+        <!-- REGISTER WORKER -->
+        <section id="registerPage" class="page hidden">
+            <div class="panel">
+                <h2 data-i18n="registerWorker">Register as Worker</h2>
+
+                <form id="registerWorkerForm">
+                    <div class="form-grid">
+                        <div>
+                            <label for="regName" data-i18n="fullNameLabel">Full Name</label>
+                            <input id="regName" required>
+                        </div>
+                        <div>
+                            <label for="regProfession" data-i18n="professionLabel">Profession</label>
+                            <select id="regProfession" required>
+                                <option value="">Select profession</option>
+                                <option>Painter</option>
+                                <option>Carpenter</option>
+                                <option>Electrician</option>
+                                <option>Tailor</option>
+                                <option>Plumber</option>
+                                <option>Mason</option>
+                                <option>Mechanic</option>
+                                <option>Welder</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="regSkills" data-i18n="skillsLabel">Skills</label>
+                            <input id="regSkills" required
+                                   data-placeholder="skillsPlaceholder"
+                                   placeholder="Example: wiring, repairs">
+                        </div>
+                        <div>
+                            <label for="regPhone" data-i18n="mobileLabel">Mobile Number</label>
+                            <input id="regPhone" type="tel" inputmode="numeric"
+                                   maxlength="10" pattern="[0-9]{10}" required>
+                        </div>
+                        <div>
+                            <label for="regLocation" data-i18n="locationLabel">Location</label>
+                            <input id="regLocation" required
+                                   data-placeholder="locationPlaceholder"
+                                   placeholder="Enter city or area">
+                        </div>
+                        <div>
+                            <label for="regExperience" data-i18n="experienceLabel">Experience (years)</label>
+                            <input id="regExperience" type="number" min="0" max="60" required>
+                        </div>
+                        <div>
+                            <label for="regPin">Choose 4-digit PIN</label>
+                            <input id="regPin" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required>
+                        </div>
+                    </div>
+
+                    <label for="regDescription" data-i18n="descriptionLabel">About Your Work</label>
+                    <textarea id="regDescription"
+                              data-placeholder="descriptionPlaceholder"
+                              placeholder="Describe your work and experience"></textarea>
+
+                    <button type="submit" data-i18n="createProfile">Create Profile</button>
+                </form>
+
+                <div id="registerMessage" class="message hidden" aria-live="polite"></div>
+                <div id="newWorkerQR"></div>
+            </div>
+        </section>
+
+        <!-- JOBS -->
+        <section id="jobsPage" class="page hidden">
+            <div class="panel">
+                <h2 data-i18n="jobsNear">Jobs Near Me</h2>
+
+                <form id="jobSearchForm">
+                    <div class="form-grid">
+                        <div>
+                            <label for="jobSearchQuery" data-i18n="jobSearchLabel">Job Title or Skill</label>
+                            <input id="jobSearchQuery" data-placeholder="jobSearchPlaceholder"
+                                   placeholder="Example: electrician">
+                        </div>
+                        <div>
+                            <label for="jobSearchLocation" data-i18n="locationLabel">Location</label>
+                            <input id="jobSearchLocation" data-placeholder="locationPlaceholder"
+                                   placeholder="Enter city or area">
+                        </div>
+                    </div>
+                    <button type="submit" data-i18n="search">Search</button>
+                    <button type="button" onclick="renderJobs()" data-i18n="showAll">Show All</button>
+                </form>
+
+                <h2 style="margin-top:28px" data-i18n="postJobTitle">Post a Job</h2>
+
+                <form id="postJobForm">
+                    <label for="jobTitle" data-i18n="jobTitleLabel">Job Title</label>
+                    <input id="jobTitle" required>
+
+                    <label for="jobDescription" data-i18n="descriptionLabel">Description</label>
+                    <textarea id="jobDescription" required></textarea>
+
+                    <label for="jobLocation" data-i18n="locationLabel">Location</label>
+                    <input id="jobLocation" required>
+
+                    <label for="jobContact" data-i18n="contactLabel">Contact Number</label>
+                    <input id="jobContact" type="tel" inputmode="numeric"
+                           maxlength="10" pattern="[0-9]{10}" required>
+
+                    <button type="submit" data-i18n="postJob">Post Job</button>
+                </form>
+
+                <div id="jobMessage" class="message hidden" aria-live="polite"></div>
+            </div>
+
+            <div id="jobResults" class="result-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>©️ 2026 Desi Kalakaar</p>
+        <p data-i18n="footerText">Connecting skilled workers with local opportunities.</p>
+    </footer>
+</div>
+
+<script>
+/* ---------------- BACKEND AUTH ---------------- */
+let verifiedMobile = "";
+let isLoggedIn = false;
+let authToken = sessionStorage.getItem("desiKalakaarToken") || "";
+const loginScreen = document.getElementById("loginScreen");
+const app = document.getElementById("app");
+const loginMessage = document.getElementById("loginMessage");
+
+async function api(path, options = {}) {
+    const headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
+    if (authToken) headers.Authorization = "Bearer " + authToken;
+    const response = await fetch("/api" + path, Object.assign({}, options, { headers }));
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || "Request failed (" + response.status + ")");
+    return data;
+}
+function setLoggedIn(data, phone) {
+    authToken = data.token;
+    sessionStorage.setItem("desiKalakaarToken", authToken);
+    verifiedMobile = phone || (data.worker && data.worker.phone) || "";
+    isLoggedIn = true;
+    loginScreen.classList.add("hidden");
+    app.classList.remove("hidden");
+    document.getElementById("regPhone").value = verifiedMobile;
+    document.getElementById("jobContact").value = "";
+    showPage("home");
+    renderWorkers();
+    renderJobs();
+}
+document.getElementById("mobileForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const mobile = document.getElementById("mobile").value.trim();
+    const pin = document.getElementById("loginPin").value.trim();
+    loginMessage.classList.remove("hidden");
+    if (!/^[0-9]{10}$/.test(mobile) || !/^[0-9]{4}$/.test(pin)) {
+        loginMessage.textContent = "Enter a valid 10-digit mobile number and 4-digit PIN.";
+        return;
+    }
+    try {
+        const data = await api("/login", { method: "POST", body: JSON.stringify({ phone: mobile, pin }) });
+        loginMessage.classList.add("hidden");
+        setLoggedIn(data, mobile);
+    } catch (err) {
+        loginMessage.textContent = err.message;
+    }
+});
+document.getElementById("signupForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const body = {
+        name: document.getElementById("signupName").value.trim(),
+        trade: document.getElementById("signupTrade").value.trim(),
+        city: document.getElementById("signupCity").value.trim(),
+        claimedYears: Number(document.getElementById("signupYears").value),
+        phone: document.getElementById("signupPhone").value.trim(),
+        pin: document.getElementById("signupPin").value.trim()
+    };
+    loginMessage.classList.remove("hidden");
+    try {
+        const data = await api("/register", { method: "POST", body: JSON.stringify(body) });
+        loginMessage.classList.add("hidden");
+        setLoggedIn(data, body.phone);
+    } catch (err) {
+        loginMessage.textContent = err.message;
+    }
+});
+async function logout() {
+    isLoggedIn = false;
+    authToken = "";
+    verifiedMobile = "";
+    sessionStorage.removeItem("desiKalakaarToken");
+    workers = [];
+    jobs = [];
+    app.classList.add("hidden");
+    loginScreen.classList.remove("hidden");
+    document.getElementById("mobileForm").reset();
+    document.getElementById("signupForm").reset();
+    loginMessage.classList.add("hidden");
+}
+/* ---------------- LANGUAGE SUPPORT ----------------
+   This app uses its own translations, not a translator widget.
+   Some long descriptions and worker-entered content stay as entered.
+*/
+
+const translations = {
+en: {
+ loginTitle:"Welcome!", loginSubtitle:"Register your mobile number and verify the OTP to enter the app.",
+ mobileLabel:"Mobile Number", generateOtp:"Generate Demo OTP", otpLabel:"Enter OTP", verifyOtp:"Verify OTP",
+ demoNotice:"Demo only: the OTP is shown on this screen. Real SMS verification requires a secure backend and an OTP service.",
+ demoOTP:"Your demo OTP is:", invalidMobile:"Enter a valid 10-digit mobile number.", invalidOTP:"Incorrect OTP. Please try again.",
+ logout:"Logout", home:"Home", findWorkers:"Find Workers", registerWorker:"Register as Worker", jobsNear:"Jobs Near Me",
+ welcome:"Find Skilled Workers Near You", welcomeText:"Connect with local painters, carpenters, electricians, tailors, plumbers and other skilled workers.",
+ quickSearch:"Quick Search", searchLabel:"What are you looking for?", quickPlaceholder:"Enter a worker type, skill or job",
+ locationLabel:"Location", locationPlaceholder:"Enter city or area", search:"Search", searchWorkers:"Search Workers",
+ findDesc:"Search local workers by profession, skill and location.", registerDesc:"Create a worker profile and generate a QR code.",
+ createProfile:"Create Profile", jobsDesc:"Find local work or publish a job for workers.", viewJobs:"View Jobs",
+ professionLabel:"Worker Type / Profession", allTypes:"All types", nameSkillLabel:"Name or Skill",
+ nameSkillPlaceholder:"Search name or skill", experienceLabel:"Experience (years)", experiencePlaceholder:"For example: 2",
+ showAll:"Show All", fullNameLabel:"Full Name", skillsLabel:"Skills", skillsPlaceholder:"Example: wiring, repairs",
+ descriptionLabel:"About Your Work / Description", descriptionPlaceholder:"Describe your work and experience",
+ jobSearchLabel:"Job Title or Skill", jobSearchPlaceholder:"Example: electrician", postJobTitle:"Post a Job",
+ jobTitleLabel:"Job Title", contactLabel:"Contact Number", postJob:"Post Job", footerText:"Connecting skilled workers with local opportunities.",
+ noWorkers:"No workers found.", workersFound:"Workers found:", noJobs:"No jobs found.", jobsFound:"Jobs found:",
+ years:"years", skills:"Skills", phone:"Phone", experience:"Experience", profileCreated:"Worker profile created successfully!",
+ qrTitle:"Your Worker QR Code", qrHelp:"Scan this QR code to view the worker information encoded in it.",
+ jobPosted:"Job posted successfully!", worker:"Worker", postedBy:"Posted by", required:"Please complete all required fields."
+},
+hi: {
+ loginTitle:"स्वागत है!", loginSubtitle:"ऐप में प्रवेश करने के लिए अपना मोबाइल नंबर दर्ज करें और OTP सत्यापित करें।",
+ mobileLabel:"मोबाइल नंबर", generateOtp:"डेमो OTP बनाएं", otpLabel:"OTP दर्ज करें", verifyOtp:"OTP सत्यापित करें",
+ demoNotice:"केवल डेमो: OTP इसी स्क्रीन पर दिखेगा। असली SMS सत्यापन के लिए सुरक्षित बैकएंड और OTP सेवा चाहिए।",
+ demoOTP:"आपका डेमो OTP है:", invalidMobile:"सही 10 अंकों का मोबाइल नंबर दर्ज करें।", invalidOTP:"गलत OTP। दोबारा प्रयास करें।",
+ logout:"लॉग आउट", home:"होम", findWorkers:"कारीगर खोजें", registerWorker:"कारीगर के रूप में पंजीकरण", jobsNear:"आस-पास के काम",
+ welcome:"अपने पास कुशल कारीगर खोजें", welcomeText:"पेंटर, बढ़ई, इलेक्ट्रीशियन, दर्जी, प्लंबर और अन्य कारीगरों से जुड़ें।",
+ quickSearch:"त्वरित खोज", searchLabel:"आप क्या खोज रहे हैं?", quickPlaceholder:"कारीगर, कौशल या काम दर्ज करें",
+ locationLabel:"स्थान", locationPlaceholder:"शहर या क्षेत्र दर्ज करें", search:"खोजें", searchWorkers:"कारीगर खोजें",
+ findDesc:"काम, कौशल और स्थान के आधार पर कारीगर खोजें।", registerDesc:"कारीगर प्रोफ़ाइल बनाएं और QR कोड प्राप्त करें।",
+ createProfile:"प्रोफ़ाइल बनाएं", jobsDesc:"स्थानीय काम खोजें या काम पोस्ट करें।", viewJobs:"काम देखें",
+ professionLabel:"कारीगर का प्रकार / पेशा", allTypes:"सभी प्रकार", nameSkillLabel:"नाम या कौशल",
+ nameSkillPlaceholder:"नाम या कौशल खोजें", experienceLabel:"अनुभव (वर्ष)", experiencePlaceholder:"उदाहरण: 2",
+ showAll:"सभी दिखाएं", fullNameLabel:"पूरा नाम", skillsLabel:"कौशल", skillsPlaceholder:"उदाहरण: वायरिंग, मरम्मत",
+ descriptionLabel:"अपने काम के बारे में", descriptionPlaceholder:"अपने काम और अनुभव का विवरण दें",
+ jobSearchLabel:"काम का नाम या कौशल", jobSearchPlaceholder:"उदाहरण: इलेक्ट्रीशियन", postJobTitle:"काम पोस्ट करें",
+ jobTitleLabel:"काम का नाम", contactLabel:"संपर्क नंबर", postJob:"काम पोस्ट करें", footerText:"कुशल कारीगरों को स्थानीय अवसरों से जोड़ना।",
+ noWorkers:"कोई कारीगर नहीं मिला।", workersFound:"कारीगर मिले:", noJobs:"कोई काम नहीं मिला।", jobsFound:"काम मिले:",
+ years:"वर्ष", skills:"कौशल", phone:"फोन", experience:"अनुभव", profileCreated:"कारीगर प्रोफ़ाइल सफलतापूर्वक बनी!",
+ qrTitle:"आपका कारीगर QR कोड", qrHelp:"इस QR कोड में दी गई कारीगर की जानकारी देखने के लिए स्कैन करें।",
+ jobPosted:"काम सफलतापूर्वक पोस्ट हुआ!", worker:"कारीगर", postedBy:"पोस्ट करने वाला", required:"सभी आवश्यक फ़ील्ड भरें।"
+},
+kn: {
+ loginTitle:"ಸ್ವಾಗತ!", loginSubtitle:"ಅಪ್ಲಿಕೇಶನ್ ಪ್ರವೇಶಿಸಲು ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ನೀಡಿ OTP ಪರಿಶೀಲಿಸಿ.",
+ mobileLabel:"ಮೊಬೈಲ್ ಸಂಖ್ಯೆ", generateOtp:"ಡೆಮೋ OTP ರಚಿಸಿ", otpLabel:"OTP ನಮೂದಿಸಿ", verifyOtp:"OTP ಪರಿಶೀಲಿಸಿ",
+ demoNotice:"ಡೆಮೋ ಮಾತ್ರ: OTP ಈ ಪರದೆಯಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ. ನಿಜವಾದ SMS ಪರಿಶೀಲನೆಗೆ ಸುರಕ್ಷಿತ ಬ್ಯಾಕೆಂಡ್ ಅಗತ್ಯ.",
+ demoOTP:"ನಿಮ್ಮ ಡೆಮೋ OTP:", invalidMobile:"ಸರಿಯಾದ 10 ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.", invalidOTP:"ತಪ್ಪಾದ OTP. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+ logout:"ಲಾಗ್ ಔಟ್", home:"ಮುಖಪುಟ", findWorkers:"ಕಾರ್ಮಿಕರನ್ನು ಹುಡುಕಿ", registerWorker:"ಕಾರ್ಮಿಕರಾಗಿ ನೋಂದಣಿ", jobsNear:"ಹತ್ತಿರದ ಕೆಲಸಗಳು",
+ welcome:"ನಿಮ್ಮ ಹತ್ತಿರ ನುರಿತ ಕಾರ್ಮಿಕರನ್ನು ಹುಡುಕಿ", welcomeText:"ಪೇಂಟರ್, ಬಡಗಿ, ಎಲೆಕ್ಟ್ರಿಷಿಯನ್, ಟೈಲರ್, ಪ್ಲಂಬರ್ ಮತ್ತು ಇತರರನ್ನು ಸಂಪರ್ಕಿಸಿ.",
+ quickSearch:"ತ್ವರಿತ ಹುಡುಕಾಟ", searchLabel:"ನೀವು ಏನು ಹುಡುಕುತ್ತಿದ್ದೀರಿ?", quickPlaceholder:"ಕೆಲಸ ಅಥವಾ ಕೌಶಲ್ಯ ನಮೂದಿಸಿ",
+ locationLabel:"ಸ್ಥಳ", locationPlaceholder:"ನಗರ ಅಥವಾ ಪ್ರದೇಶ ನಮೂದಿಸಿ", search:"ಹುಡುಕಿ", searchWorkers:"ಕಾರ್ಮಿಕರನ್ನು ಹುಡುಕಿ",
+ findDesc:"ವೃತ್ತಿ, ಕೌಶಲ್ಯ ಮತ್ತು ಸ್ಥಳದ ಮೂಲಕ ಹುಡುಕಿ.", registerDesc:"ಕಾರ್ಮಿಕರ ಪ್ರೊಫೈಲ್ ಮತ್ತು QR ಕೋಡ್ ರಚಿಸಿ.",
+ createProfile:"ಪ್ರೊಫೈಲ್ ರಚಿಸಿ", jobsDesc:"ಸ್ಥಳೀಯ ಕೆಲಸ ಹುಡುಕಿ ಅಥವಾ ಕೆಲಸ ಪ್ರಕಟಿಸಿ.", viewJobs:"ಕೆಲಸಗಳನ್ನು ನೋಡಿ",
+ professionLabel:"ವೃತ್ತಿ", allTypes:"ಎಲ್ಲಾ ವಿಧಗಳು", nameSkillLabel:"ಹೆಸರು ಅಥವಾ ಕೌಶಲ್ಯ",
+ nameSkillPlaceholder:"ಹೆಸರು ಅಥವಾ ಕೌಶಲ್ಯ ಹುಡುಕಿ", experienceLabel:"ಅನುಭವ (ವರ್ಷ)", experiencePlaceholder:"ಉದಾಹರಣೆ: 2",
+ showAll:"ಎಲ್ಲವನ್ನೂ ತೋರಿಸಿ", fullNameLabel:"ಪೂರ್ಣ ಹೆಸರು", skillsLabel:"ಕೌಶಲ್ಯಗಳು", skillsPlaceholder:"ಉದಾಹರಣೆ: ವೈರಿಂಗ್, ದುರಸ್ತಿ",
+ descriptionLabel:"ನಿಮ್ಮ ಕೆಲಸದ ಬಗ್ಗೆ", descriptionPlaceholder:"ಕೆಲಸ ಮತ್ತು ಅನುಭವ ವಿವರಿಸಿ",
+ jobSearchLabel:"ಕೆಲಸದ ಹೆಸರು ಅಥವಾ ಕೌಶಲ್ಯ", jobSearchPlaceholder:"ಉದಾಹರಣೆ: ಎಲೆಕ್ಟ್ರಿಷಿಯನ್", postJobTitle:"ಕೆಲಸ ಪ್ರಕಟಿಸಿ",
+ jobTitleLabel:"ಕೆಲಸದ ಹೆಸರು", contactLabel:"ಸಂಪರ್ಕ ಸಂಖ್ಯೆ", postJob:"ಕೆಲಸ ಪ್ರಕಟಿಸಿ", footerText:"ನುರಿತ ಕಾರ್ಮಿಕರನ್ನು ಸ್ಥಳೀಯ ಅವಕಾಶಗಳೊಂದಿಗೆ ಸಂಪರ್ಕಿಸುವುದು.",
+ noWorkers:"ಕಾರ್ಮಿಕರು ಕಂಡುಬಂದಿಲ್ಲ.", workersFound:"ಕಾರ್ಮಿಕರು ಕಂಡುಬಂದರು:", noJobs:"ಕೆಲಸಗಳು ಕಂಡುಬಂದಿಲ್ಲ.", jobsFound:"ಕೆಲಸಗಳು ಕಂಡುಬಂದವು:",
+ years:"ವರ್ಷ", skills:"ಕೌಶಲ್ಯಗಳು", phone:"ಫೋನ್", experience:"ಅನುಭವ", profileCreated:"ಕಾರ್ಮಿಕರ ಪ್ರೊಫೈಲ್ ರಚಿಸಲಾಗಿದೆ!",
+ qrTitle:"ನಿಮ್ಮ QR ಕೋಡ್", qrHelp:"ಕಾರ್ಮಿಕರ ಮಾಹಿತಿಗಾಗಿ ಈ QR ಕೋಡ್ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ.",
+ jobPosted:"ಕೆಲಸ ಪ್ರಕಟಿಸಲಾಗಿದೆ!", worker:"ಕಾರ್ಮಿಕ", postedBy:"ಪ್ರಕಟಿಸಿದವರು", required:"ಎಲ್ಲಾ ಅಗತ್ಯ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ."
+},
+te: {
+ loginTitle:"స్వాగతం!", loginSubtitle:"యాప్‌లోకి ప్రవేశించడానికి మొబైల్ నంబర్ నమోదు చేసి OTP ధృవీకరించండి.",
+ mobileLabel:"మొబైల్ నంబర్", generateOtp:"డెమో OTP సృష్టించండి", otpLabel:"OTP నమోదు చేయండి", verifyOtp:"OTP ధృవీకరించండి",
+ demoNotice:"డెమో మాత్రమే: OTP ఈ స్క్రీన్‌పై కనిపిస్తుంది. నిజమైన SMS ధృవీకరణకు సురక్షిత బ్యాకెండ్ అవసరం.",
+ demoOTP:"మీ డెమో OTP:", invalidMobile:"సరైన 10 అంకెల మొబైల్ నంబర్ నమోదు చేయండి.", invalidOTP:"తప్పు OTP. మళ్లీ ప్రయత్నించండి.",
+ logout:"లాగ్ అవుట్", home:"హోమ్", findWorkers:"కార్మికులను వెతకండి", registerWorker:"కార్మికుడిగా నమోదు", jobsNear:"దగ్గరలో ఉద్యోగాలు",
+ welcome:"మీ దగ్గర నైపుణ్యం కలిగిన కార్మికులను కనుగొనండి", welcomeText:"పెయింటర్లు, వడ్రంగులు, ఎలక్ట్రీషియన్లు, టైలర్లు, ప్లంబర్లను సంప్రదించండి.",
+ quickSearch:"త్వరిత శోధన", searchLabel:"మీరు ఏమి వెతుకుతున్నారు?", quickPlaceholder:"పని లేదా నైపుణ్యం నమోదు చేయండి",
+ locationLabel:"ప్రదేశం", locationPlaceholder:"నగరం లేదా ప్రాంతం నమోదు చేయండి", search:"వెతకండి", searchWorkers:"కార్మికులను వెతకండి",
+ findDesc:"వృత్తి, నైపుణ్యం, ప్రదేశం ఆధారంగా వెతకండి.", registerDesc:"కార్మికుడి ప్రొఫైల్ మరియు QR కోడ్ సృష్టించండి.",
+ createProfile:"ప్రొఫైల్ సృష్టించండి", jobsDesc:"స్థానిక పనులను వెతకండి లేదా ఉద్యోగం పోస్ట్ చేయండి.", viewJobs:"పనులు చూడండి",
+ professionLabel:"వృత్తి", allTypes:"అన్ని రకాలు", nameSkillLabel:"పేరు లేదా నైపుణ్యం",
+ nameSkillPlaceholder:"పేరు లేదా నైపుణ్యం వెతకండి", experienceLabel:"అనుభవం (సంవత్సరాలు)", experiencePlaceholder:"ఉదాహరణ: 2",
+ showAll:"అన్నీ చూపించండి", fullNameLabel:"పూర్తి పేరు", skillsLabel:"నైపుణ్యాలు", skillsPlaceholder:"ఉదాహరణ: వైరింగ్, మరమ్మతులు",
+ descriptionLabel:"మీ పని గురించి", descriptionPlaceholder:"మీ పని మరియు అనుభవాన్ని వివరించండి",
+ jobSearchLabel:"పని పేరు లేదా నైపుణ్యం", jobSearchPlaceholder:"ఉదాహరణ: ఎలక్ట్రీషియన్", postJobTitle:"పని పోస్ట్ చేయండి",
+ jobTitleLabel:"పని పేరు", contactLabel:"సంప్రదింపు నంబర్", postJob:"పని పోస్ట్ చేయండి", footerText:"నైపుణ్యం కలిగిన కార్మికులను స్థానిక అవకాశాలతో కలపడం.",
+ noWorkers:"కార్మికులు కనబడలేదు.", workersFound:"కార్మికులు కనుగొనబడ్డారు:", noJobs:"పనులు కనబడలేదు.", jobsFound:"పనులు కనుగొనబడ్డాయి:",
+ years:"సంవత్సరాలు", skills:"నైపుణ్యాలు", phone:"ఫోన్", experience:"అనుభవం", profileCreated:"ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది!",
+ qrTitle:"మీ QR కోడ్", qrHelp:"కార్మికుడి సమాచారాన్ని చూడటానికి QR కోడ్ స్కాన్ చేయండి.",
+ jobPosted:"పని విజయవంతంగా పోస్ట్ చేయబడింది!", worker:"కార్మికుడు", postedBy:"పోస్ట్ చేసినవారు", required:"అన్ని అవసరమైన వివరాలు నమోదు చేయండి."
+},
+ta: {
+ loginTitle:"வரவேற்கிறோம்!", loginSubtitle:"செயலியில் நுழைய மொபைல் எண்ணை பதிவு செய்து OTP சரிபார்க்கவும்.",
+ mobileLabel:"மொபைல் எண்", generateOtp:"டெமோ OTP உருவாக்கு", otpLabel:"OTP உள்ளிடவும்", verifyOtp:"OTP சரிபார்க்கவும்",
+ demoNotice:"டெமோ மட்டும்: OTP இந்தத் திரையில் காட்டப்படும். உண்மையான SMS சரிபார்ப்புக்கு பாதுகாப்பான பின்புற சேவை தேவை.",
+ demoOTP:"உங்கள் டெமோ OTP:", invalidMobile:"சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்.", invalidOTP:"தவறான OTP. மீண்டும் முயற்சிக்கவும்.",
+ logout:"வெளியேறு", home:"முகப்பு", findWorkers:"தொழிலாளர்களைக் கண்டுபிடி", registerWorker:"தொழிலாளராக பதிவு செய்", jobsNear:"அருகிலுள்ள வேலைகள்",
+ welcome:"உங்களுக்கு அருகில் திறமையான தொழிலாளர்களைக் கண்டறியுங்கள்", welcomeText:"பெயிண்டர், தச்சர், மின்சார நிபுணர், தையல்காரர், பிளம்பர் ஆகியோரைத் தொடர்புகொள்ளுங்கள்.",
+ quickSearch:"விரைவு தேடல்", searchLabel:"எதைத் தேடுகிறீர்கள்?", quickPlaceholder:"வேலை அல்லது திறனை உள்ளிடவும்",
+ locationLabel:"இடம்", locationPlaceholder:"நகரம் அல்லது பகுதியை உள்ளிடவும்", search:"தேடு", searchWorkers:"தொழிலாளர்களைத் தேடு",
+ findDesc:"தொழில், திறன் மற்றும் இடத்தின் அடிப்படையில் தேடுங்கள்.", registerDesc:"தொழிலாளர் சுயவிவரமும் QR குறியீடும் உருவாக்குங்கள்.",
+ createProfile:"சுயவிவரம் உருவாக்கு", jobsDesc:"உள்ளூர் வேலைகளைத் தேடுங்கள் அல்லது வேலையைப் பதிவு செய்யுங்கள்.", viewJobs:"வேலைகளைப் பார்",
+ professionLabel:"தொழில்", allTypes:"அனைத்து வகைகளும்", nameSkillLabel:"பெயர் அல்லது திறன்",
+ nameSkillPlaceholder:"பெயர் அல்லது திறனைத் தேடு", experienceLabel:"அனுபவம் (ஆண்டுகள்)", experiencePlaceholder:"எடுத்துக்காட்டு: 2",
+ showAll:"அனைத்தையும் காட்டு", fullNameLabel:"முழுப் பெயர்", skillsLabel:"திறன்கள்", skillsPlaceholder:"எடுத்துக்காட்டு: வயரிங், பழுது நீக்கம்",
+ descriptionLabel:"உங்கள் வேலையைப் பற்றி", descriptionPlaceholder:"உங்கள் வேலை மற்றும் அனுபவத்தை விவரிக்கவும்",
+ jobSearchLabel:"வேலை பெயர் அல்லது திறன்", jobSearchPlaceholder:"எடுத்துக்காட்டு: மின்சார நிபுணர்", postJobTitle:"வேலையைப் பதிவு செய்",
+ jobTitleLabel:"வேலை பெயர்", contactLabel:"தொடர்பு எண்", postJob:"வேலையைப் பதிவு செய்", footerText:"திறமையான தொழிலாளர்களை உள்ளூர் வாய்ப்புகளுடன் இணைக்கிறது.",
+ noWorkers:"தொழிலாளர்கள் இல்லை.", workersFound:"கண்டுபிடிக்கப்பட்ட தொழிலாளர்கள்:", noJobs:"வேலைகள் இல்லை.", jobsFound:"கண்டுபிடிக்கப்பட்ட வேலைகள்:",
+ years:"ஆண்டுகள்", skills:"திறன்கள்", phone:"தொலைபேசி", experience:"அனுபவம்", profileCreated:"சுயவிவரம் உருவாக்கப்பட்டது!",
+ qrTitle:"உங்கள் QR குறியீடு", qrHelp:"தொழிலாளர் தகவலைப் பார்க்க இந்த QR குறியீட்டை ஸ்கேன் செய்யவும்.",
+ jobPosted:"வேலை பதிவு செய்யப்பட்டது!", worker:"தொழிலாளர்", postedBy:"பதிவு செய்தவர்", required:"தேவையான விவரங்களை நிரப்பவும்."
+},
+ml: {
+ loginTitle:"സ്വാഗതം!", loginSubtitle:"ആപ്പിൽ പ്രവേശിക്കാൻ മൊബൈൽ നമ്പർ നൽകി OTP പരിശോധിക്കുക.",
+ mobileLabel:"മൊബൈൽ നമ്പർ", generateOtp:"ഡെമോ OTP സൃഷ്ടിക്കുക", otpLabel:"OTP നൽകുക", verifyOtp:"OTP പരിശോധിക്കുക",
+ demoNotice:"ഡെമോ മാത്രം: OTP ഈ സ്ക്രീനിൽ കാണിക്കും. യഥാർത്ഥ SMS പരിശോധനയ്ക്ക് സുരക്ഷിതമായ ബാക്കെൻഡ് ആവശ്യമാണ്.",
+ demoOTP:"നിങ്ങളുടെ ഡെമോ OTP:", invalidMobile:"ശരിയായ 10 അക്ക മൊബൈൽ നമ്പർ നൽകുക.", invalidOTP:"തെറ്റായ OTP. വീണ്ടും ശ്രമിക്കുക.",
+ logout:"ലോഗ് ഔട്ട്", home:"ഹോം", findWorkers:"തൊഴിലാളികളെ കണ്ടെത്തുക", registerWorker:"തൊഴിലാളിയായി രജിസ്റ്റർ ചെയ്യുക", jobsNear:"സമീപത്തെ ജോലികൾ",
+ welcome:"നിങ്ങളുടെ അടുത്തുള്ള വിദഗ്ധ തൊഴിലാളികളെ കണ്ടെത്തുക", welcomeText:"പെയിന്റർ, മരപ്പണിക്കാരൻ, ഇലക്ട്രീഷ്യൻ, തയ്യൽക്കാരൻ, പ്ലംബർ എന്നിവരുമായി ബന്ധപ്പെടുക.",
+ quickSearch:"വേഗത്തിലുള്ള തിരയൽ", searchLabel:"നിങ്ങൾ എന്താണ് തിരയുന്നത്?", quickPlaceholder:"ജോലി അല്ലെങ്കിൽ കഴിവ് നൽകുക",
+ locationLabel:"സ്ഥലം", locationPlaceholder:"നഗരം അല്ലെങ്കിൽ പ്രദേശം നൽകുക", search:"തിരയുക", searchWorkers:"തൊഴിലാളികളെ തിരയുക",
+ findDesc:"തൊഴിൽ, കഴിവ്, സ്ഥലം എന്നിവ ഉപയോഗിച്ച് തിരയുക.", registerDesc:"തൊഴിലാളിയുടെ പ്രൊഫൈലും QR കോഡും സൃഷ്ടിക്കുക.",
+ createProfile:"പ്രൊഫൈൽ സൃഷ്ടിക്കുക", jobsDesc:"പ്രാദേശിക ജോലികൾ കണ്ടെത്തുക അല്ലെങ്കിൽ ജോലി പോസ്റ്റ് ചെയ്യുക.", viewJobs:"ജോലികൾ കാണുക",
+ professionLabel:"തൊഴിൽ", allTypes:"എല്ലാ തരങ്ങളും", nameSkillLabel:"പേര് അല്ലെങ്കിൽ കഴിവ്",
+ nameSkillPlaceholder:"പേരോ കഴിവോ തിരയുക", experienceLabel:"പരിചയം (വർഷം)", experiencePlaceholder:"ഉദാഹരണം: 2",
+ showAll:"എല്ലാം കാണിക്കുക", fullNameLabel:"പൂർണ്ണ പേര്", skillsLabel:"കഴിവുകൾ", skillsPlaceholder:"ഉദാഹരണം: വയറിംഗ്, അറ്റകുറ്റപ്പണി",
+ descriptionLabel:"നിങ്ങളുടെ ജോലിയെക്കുറിച്ച്", descriptionPlaceholder:"ജോലിയും പരിചയവും വിവരിക്കുക",
+ jobSearchLabel:"ജോലിയുടെ പേര് അല്ലെങ്കിൽ കഴിവ്", jobSearchPlaceholder:"ഉദാഹരണം: ഇലക്ട്രീഷ്യൻ", postJobTitle:"ജോലി പോസ്റ്റ് ചെയ്യുക",
+ jobTitleLabel:"ജോലിയുടെ പേര്", contactLabel:"ബന്ധപ്പെടാനുള്ള നമ്പർ", postJob:"ജോലി പോസ്റ്റ് ചെയ്യുക", footerText:"വിദഗ്ധ തൊഴിലാളികളെ പ്രാദേശിക അവസരങ്ങളുമായി ബന്ധിപ്പിക്കുന്നു.",
+ noWorkers:"തൊഴിലാളികളെ കണ്ടെത്തിയില്ല.", workersFound:"കണ്ടെത്തിയ തൊഴിലാളികൾ:", noJobs:"ജോലികൾ കണ്ടെത്തിയില്ല.", jobsFound:"കണ്ടെത്തിയ ജോലികൾ:",
+ years:"വർഷം", skills:"കഴിവുകൾ", phone:"ഫോൺ", experience:"പരിചയം", profileCreated:"പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു!",
+ qrTitle:"നിങ്ങളുടെ QR കോഡ്", qrHelp:"തൊഴിലാളിയുടെ വിവരങ്ങൾ കാണാൻ ഈ QR കോഡ് സ്കാൻ ചെയ്യുക.",
+ jobPosted:"ജോലി പോസ്റ്റ് ചെയ്തു!", worker:"തൊഴിലാളി", postedBy:"പോസ്റ്റ് ചെയ്തത്", required:"ആവശ്യമായ വിവരങ്ങൾ പൂരിപ്പിക്കുക."
+},
+mr: {
+ loginTitle:"स्वागत आहे!", loginSubtitle:"अॅपमध्ये प्रवेश करण्यासाठी मोबाईल क्रमांक नोंदवा आणि OTP तपासा.",
+ mobileLabel:"मोबाईल क्रमांक", generateOtp:"डेमो OTP तयार करा", otpLabel:"OTP टाका", verifyOtp:"OTP तपासा",
+ demoNotice:"फक्त डेमो: OTP या स्क्रीनवर दिसेल. खऱ्या SMS पडताळणीसाठी सुरक्षित बॅकएंड आवश्यक आहे.",
+ demoOTP:"तुमचा डेमो OTP:", invalidMobile:"योग्य 10 अंकी मोबाईल क्रमांक टाका.", invalidOTP:"चुकीचा OTP. पुन्हा प्रयत्न करा.",
+ logout:"लॉग आउट", home:"मुख्यपृष्ठ", findWorkers:"कामगार शोधा", registerWorker:"कामगार म्हणून नोंदणी", jobsNear:"जवळची कामे",
+ welcome:"तुमच्या जवळील कुशल कामगार शोधा", welcomeText:"रंगारी, सुतार, इलेक्ट्रिशियन, शिंपी, प्लंबर आणि इतरांशी संपर्क साधा.",
+ quickSearch:"जलद शोध", searchLabel:"तुम्ही काय शोधत आहात?", quickPlaceholder:"काम किंवा कौशल्य टाका",
+ locationLabel:"ठिकाण", locationPlaceholder:"शहर किंवा परिसर टाका", search:"शोधा", searchWorkers:"कामगार शोधा",
+ findDesc:"व्यवसाय, कौशल्य आणि ठिकाणानुसार कामगार शोधा.", registerDesc:"कामगार प्रोफाइल आणि QR कोड तयार करा.",
+ createProfile:"प्रोफाइल तयार करा", jobsDesc:"स्थानिक काम शोधा किंवा कामाची जाहिरात द्या.", viewJobs:"कामे पहा",
+ professionLabel:"व्यवसाय", allTypes:"सर्व प्रकार", nameSkillLabel:"नाव किंवा कौशल्य",
+ nameSkillPlaceholder:"नाव किंवा कौशल्य शोधा", experienceLabel:"अनुभव (वर्षे)", experiencePlaceholder:"उदाहरण: 2",
+ showAll:"सर्व दाखवा", fullNameLabel:"पूर्ण नाव", skillsLabel:"कौशल्ये", skillsPlaceholder:"उदाहरण: वायरिंग, दुरुस्ती",
+ descriptionLabel:"तुमच्या कामाबद्दल", descriptionPlaceholder:"काम आणि अनुभवाचे वर्णन करा",
+ jobSearchLabel:"कामाचे नाव किंवा कौशल्य", jobSearchPlaceholder:"उदाहरण: इलेक्ट्रिशियन", postJobTitle:"काम पोस्ट करा",
+ jobTitleLabel:"कामाचे नाव", contactLabel:"संपर्क क्रमांक", postJob:"काम पोस्ट करा", footerText:"कुशल कामगारांना स्थानिक संधींशी जोडणे.",
+ noWorkers:"कामगार सापडले नाहीत.", workersFound:"सापडलेले कामगार:", noJobs:"कामे सापडली नाहीत.", jobsFound:"सापडलेली कामे:",
+ years:"वर्षे", skills:"कौशल्ये", phone:"फोन", experience:"अनुभव", profileCreated:"कामगार प्रोफाइल तयार झाले!",
+ qrTitle:"तुमचा QR कोड", qrHelp:"कामगाराची माहिती पाहण्यासाठी हा QR कोड स्कॅन करा.",
+ jobPosted:"काम पोस्ट झाले!", worker:"कामगार", postedBy:"पोस्ट करणारे", required:"सर्व आवश्यक माहिती भरा."
+},
+bn: {
+ loginTitle:"স্বাগতম!", loginSubtitle:"অ্যাপে প্রবেশ করতে মোবাইল নম্বর দিন এবং OTP যাচাই করুন।",
+ mobileLabel:"মোবাইল নম্বর", generateOtp:"ডেমো OTP তৈরি করুন", otpLabel:"OTP লিখুন", verifyOtp:"OTP যাচাই করুন",
+ demoNotice:"শুধু ডেমো: OTP এই স্ক্রিনে দেখানো হবে। আসল SMS যাচাইয়ের জন্য নিরাপদ ব্যাকএন্ড প্রয়োজন।",
+ demoOTP:"আপনার ডেমো OTP:", invalidMobile:"সঠিক ১০ সংখ্যার মোবাইল নম্বর লিখুন।", invalidOTP:"ভুল OTP। আবার চেষ্টা করুন।",
+ logout:"লগ আউট", home:"হোম", findWorkers:"কর্মী খুঁজুন", registerWorker:"কর্মী হিসেবে নিবন্ধন", jobsNear:"কাছাকাছি কাজ",
+ welcome:"আপনার কাছাকাছি দক্ষ কর্মী খুঁজুন", welcomeText:"রংমিস্ত্রি, কাঠমিস্ত্রি, ইলেকট্রিশিয়ান, দর্জি, প্লাম্বার এবং অন্যদের সঙ্গে যোগাযোগ করুন।",
+ quickSearch:"দ্রুত অনুসন্ধান", searchLabel:"আপনি কী খুঁজছেন?", quickPlaceholder:"কাজ বা দক্ষতা লিখুন",
+ locationLabel:"অবস্থান", locationPlaceholder:"শহর বা এলাকা লিখুন", search:"খুঁজুন", searchWorkers:"কর্মী খুঁজুন",
+ findDesc:"পেশা, দক্ষতা ও অবস্থান অনুযায়ী কর্মী খুঁজুন।", registerDesc:"কর্মীর প্রোফাইল এবং QR কোড তৈরি করুন।",
+ createProfile:"প্রোফাইল তৈরি করুন", jobsDesc:"স্থানীয় কাজ খুঁজুন বা কাজ পোস্ট করুন।", viewJobs:"কাজ দেখুন",
+ professionLabel:"পেশা", allTypes:"সব ধরন", nameSkillLabel:"নাম বা দক্ষতা",
+ nameSkillPlaceholder:"নাম বা দক্ষতা খুঁজুন", experienceLabel:"অভিজ্ঞতা (বছর)", experiencePlaceholder:"উদাহরণ: 2",
+ showAll:"সব দেখুন", fullNameLabel:"পুরো নাম", skillsLabel:"দক্ষতা", skillsPlaceholder:"উদাহরণ: ওয়্যারিং, মেরামত",
+ descriptionLabel:"আপনার কাজ সম্পর্কে", descriptionPlaceholder:"আপনার কাজ ও অভিজ্ঞতা বর্ণনা করুন",
+ jobSearchLabel:"কাজের নাম বা দক্ষতা", jobSearchPlaceholder:"উদাহরণ: ইলেকট্রিশিয়ান", postJobTitle:"কাজ পোস্ট করুন",
+ jobTitleLabel:"কাজের নাম", contactLabel:"যোগাযোগ নম্বর", postJob:"কাজ পোস্ট করুন", footerText:"দক্ষ কর্মীদের স্থানীয় সুযোগের সঙ্গে যুক্ত করা।",
+ noWorkers:"কোনো কর্মী পাওয়া যায়নি।", workersFound:"কর্মী পাওয়া গেছে:", noJobs:"কোনো কাজ পাওয়া যায়নি।", jobsFound:"কাজ পাওয়া গেছে:",
+ years:"বছর", skills:"দক্ষতা", phone:"ফোন", experience:"অভিজ্ঞতা", profileCreated:"কর্মীর প্রোফাইল তৈরি হয়েছে!",
+ qrTitle:"আপনার QR কোড", qrHelp:"কর্মীর তথ্য দেখতে এই QR কোড স্ক্যান করুন।",
+ jobPosted:"কাজ পোস্ট হয়েছে!", worker:"কর্মী", postedBy:"পোস্ট করেছেন", required:"সব প্রয়োজনীয় তথ্য পূরণ করুন।"
+},
+gu: {
+ loginTitle:"સ્વાગત છે!", loginSubtitle:"એપમાં પ્રવેશવા માટે મોબાઇલ નંબર નોંધો અને OTP ચકાસો.",
+ mobileLabel:"મોબાઇલ નંબર", generateOtp:"ડેમો OTP બનાવો", otpLabel:"OTP દાખલ કરો", verifyOtp:"OTP ચકાસો",
+ demoNotice:"માત્ર ડેમો: OTP આ સ્ક્રીન પર દેખાશે. વાસ્તવિક SMS ચકાસણી માટે સુરક્ષિત બેકએન્ડ જરૂરી છે.",
+ demoOTP:"તમારો ડેમો OTP:", invalidMobile:"યોગ્ય 10 અંકનો મોબાઇલ નંબર દાખલ કરો.", invalidOTP:"ખોટો OTP. ફરી પ્રયાસ કરો.",
+ logout:"લૉગ આઉટ", home:"હોમ", findWorkers:"કામદારો શોધો", registerWorker:"કામદાર તરીકે નોંધણી", jobsNear:"નજીકની નોકરીઓ",
+ welcome:"તમારી નજીક કુશળ કામદારો શોધો", welcomeText:"પેઇન્ટર, સુથાર, ઇલેક્ટ્રિશિયન, દરજી, પ્લમ્બર અને અન્ય સાથે જોડાઓ.",
+ quickSearch:"ઝડપી શોધ", searchLabel:"તમે શું શોધી રહ્યા છો?", quickPlaceholder:"કામ અથવા કૌશલ્ય દાખલ કરો",
+ locationLabel:"સ્થળ", locationPlaceholder:"શહેર અથવા વિસ્તાર દાખલ કરો", search:"શોધો", searchWorkers:"કામદારો શોધો",
+ findDesc:"વ્યવસાય, કૌશલ્ય અને સ્થળના આધારે શોધો.", registerDesc:"કામદાર પ્રોફાઇલ અને QR કોડ બનાવો.",
+ createProfile:"પ્રોફાઇલ બનાવો", jobsDesc:"સ્થાનિક કામ શોધો અથવા કામ પોસ્ટ કરો.", viewJobs:"કામ જુઓ",
+ professionLabel:"વ્યવસાય", allTypes:"બધા પ્રકાર", nameSkillLabel:"નામ અથવા કૌશલ્ય",
+ nameSkillPlaceholder:"નામ અથવા કૌશલ્ય શોધો", experienceLabel:"અનુભવ (વર્ષ)", experiencePlaceholder:"ઉદાહરણ: 2",
+ showAll:"બધું બતાવો", fullNameLabel:"પૂરું નામ", skillsLabel:"કૌશલ્યો", skillsPlaceholder:"ઉદાહરણ: વાયરિંગ, સમારકામ",
+ descriptionLabel:"તમારા કામ વિશે", descriptionPlaceholder:"તમારા કામ અને અનુભવનું વર્ણન કરો",
+ jobSearchLabel:"કામનું નામ અથવા કૌશલ્ય", jobSearchPlaceholder:"ઉદાહરણ: ઇલેક્ટ્રિશિયન", postJobTitle:"કામ પોસ્ટ કરો",
+ jobTitleLabel:"કામનું નામ", contactLabel:"સંપર્ક નંબર", postJob:"કામ પોસ્ટ કરો", footerText:"કુશળ કામદારોને સ્થાનિક તકો સાથે જોડે છે.",
+ noWorkers:"કોઈ કામદાર મળ્યો નથી.", workersFound:"કામદારો મળ્યા:", noJobs:"કોઈ કામ મળ્યું નથી.", jobsFound:"કામ મળ્યાં:",
+ years:"વર્ષ", skills:"કૌશલ્યો", phone:"ફોન", experience:"અનુભવ", profileCreated:"કામદાર પ્રોફાઇલ બની ગઈ!",
+ qrTitle:"તમારો QR કોડ", qrHelp:"કામદારની માહિતી જોવા આ QR કોડ સ્કેન કરો.",
+ jobPosted:"કામ પોસ્ટ થયું!", worker:"કામદાર", postedBy:"પોસ્ટ કરનાર", required:"બધી જરૂરી વિગતો ભરો."
+},
+pa: {
+ loginTitle:"ਜੀ ਆਇਆਂ ਨੂੰ!", loginSubtitle:"ਐਪ ਵਿੱਚ ਦਾਖਲ ਹੋਣ ਲਈ ਮੋਬਾਈਲ ਨੰਬਰ ਦਿਓ ਅਤੇ OTP ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ।",
+ mobileLabel:"ਮੋਬਾਈਲ ਨੰਬਰ", generateOtp:"ਡੈਮੋ OTP ਬਣਾਓ", otpLabel:"OTP ਦਾਖਲ ਕਰੋ", verifyOtp:"OTP ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+ demoNotice:"ਸਿਰਫ਼ ਡੈਮੋ: OTP ਇਸ ਸਕ੍ਰੀਨ ਉੱਤੇ ਦਿਖੇਗਾ। ਅਸਲੀ SMS ਪੁਸ਼ਟੀ ਲਈ ਸੁਰੱਖਿਅਤ ਬੈਕਐਂਡ ਚਾਹੀਦਾ ਹੈ।",
+ demoOTP:"ਤੁਹਾਡਾ ਡੈਮੋ OTP:", invalidMobile:"ਸਹੀ 10 ਅੰਕਾਂ ਦਾ ਮੋਬਾਈਲ ਨੰਬਰ ਦਾਖਲ ਕਰੋ।", invalidOTP:"ਗਲਤ OTP। ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+ logout:"ਲੌਗ ਆਉਟ", home:"ਮੁੱਖ ਪੰਨਾ", findWorkers:"ਕਾਮੇ ਲੱਭੋ", registerWorker:"ਕਾਮੇ ਵਜੋਂ ਰਜਿਸਟਰ ਕਰੋ", jobsNear:"ਨੇੜੇ ਦੀਆਂ ਨੌਕਰੀਆਂ",
+ welcome:"ਆਪਣੇ ਨੇੜੇ ਹੁਨਰਮੰਦ ਕਾਮੇ ਲੱਭੋ", welcomeText:"ਪੇਂਟਰ, ਤਰਖਾਣ, ਇਲੈਕਟ੍ਰੀਸ਼ਨ, ਦਰਜ਼ੀ, ਪਲੰਬਰ ਅਤੇ ਹੋਰ ਕਾਮਿਆਂ ਨਾਲ ਜੁੜੋ।",
+ quickSearch:"ਤੇਜ਼ ਖੋਜ", searchLabel:"ਤੁਸੀਂ ਕੀ ਲੱਭ ਰਹੇ ਹੋ?", quickPlaceholder:"ਕੰਮ ਜਾਂ ਹੁਨਰ ਦਾਖਲ ਕਰੋ",
+ locationLabel:"ਥਾਂ", locationPlaceholder:"ਸ਼ਹਿਰ ਜਾਂ ਇਲਾਕਾ ਦਾਖਲ ਕਰੋ", search:"ਖੋਜੋ", searchWorkers:"ਕਾਮੇ ਲੱਭੋ",
+ findDesc:"ਪੇਸ਼ੇ, ਹੁਨਰ ਅਤੇ ਥਾਂ ਦੇ ਆਧਾਰ 'ਤੇ ਖੋਜੋ।", registerDesc:"ਕਾਮੇ ਦੀ ਪ੍ਰੋਫਾਈਲ ਅਤੇ QR ਕੋਡ ਬਣਾਓ।",
+ createProfile:"ਪ੍ਰੋਫਾਈਲ ਬਣਾਓ", jobsDesc:"ਸਥਾਨਕ ਕੰਮ ਲੱਭੋ ਜਾਂ ਨੌਕਰੀ ਪੋਸਟ ਕਰੋ।", viewJobs:"ਕੰਮ ਵੇਖੋ",
+ professionLabel:"ਪੇਸ਼ਾ", allTypes:"ਸਾਰੀਆਂ ਕਿਸਮਾਂ", nameSkillLabel:"ਨਾਮ ਜਾਂ ਹੁਨਰ",
+ nameSkillPlaceholder:"ਨਾਮ ਜਾਂ ਹੁਨਰ ਲੱਭੋ", experienceLabel:"ਤਜਰਬਾ (ਸਾਲ)", experiencePlaceholder:"ਉਦਾਹਰਨ: 2",
+ showAll:"ਸਭ ਦਿਖਾਓ", fullNameLabel:"ਪੂਰਾ ਨਾਮ", skillsLabel:"ਹੁਨਰ", skillsPlaceholder:"ਉਦਾਹਰਨ: ਵਾਇਰਿੰਗ, ਮੁਰੰਮਤ",
+ descriptionLabel:"ਤੁਹਾਡੇ ਕੰਮ ਬਾਰੇ", descriptionPlaceholder:"ਆਪਣੇ ਕੰਮ ਅਤੇ ਤਜਰਬੇ ਬਾਰੇ ਦੱਸੋ",
+ jobSearchLabel:"ਕੰਮ ਦਾ ਨਾਮ ਜਾਂ ਹੁਨਰ", jobSearchPlaceholder:"ਉਦਾਹਰਨ: ਇਲੈਕਟ੍ਰੀਸ਼ਨ", postJobTitle:"ਨੌਕਰੀ ਪੋਸਟ ਕਰੋ",
+ jobTitleLabel:"ਕੰਮ ਦਾ ਨਾਮ", contactLabel:"ਸੰਪਰਕ ਨੰਬਰ", postJob:"ਨੌਕਰੀ ਪੋਸਟ ਕਰੋ", footerText:"ਹੁਨਰਮੰਦ ਕਾਮਿਆਂ ਨੂੰ ਸਥਾਨਕ ਮੌਕਿਆਂ ਨਾਲ ਜੋੜਨਾ।",
+ noWorkers:"ਕੋਈ ਕਾਮਾ ਨਹੀਂ ਮਿਲਿਆ।", workersFound:"ਕਾਮੇ ਮਿਲੇ:", noJobs:"ਕੋਈ ਕੰਮ ਨਹੀਂ ਮਿਲਿਆ।", jobsFound:"ਕੰਮ ਮਿਲੇ:",
+ years:"ਸਾਲ", skills:"ਹੁਨਰ", phone:"ਫੋਨ", experience:"ਤਜਰਬਾ", profileCreated:"ਕਾਮੇ ਦੀ ਪ੍ਰੋਫਾਈਲ ਬਣ ਗਈ!",
+ qrTitle:"ਤੁਹਾਡਾ QR ਕੋਡ", qrHelp:"ਕਾਮੇ ਦੀ ਜਾਣਕਾਰੀ ਲਈ ਇਸ QR ਕੋਡ ਨੂੰ ਸਕੈਨ ਕਰੋ।",
+ jobPosted:"ਨੌਕਰੀ ਪੋਸਟ ਹੋ ਗਈ!", worker:"ਕਾਮਾ", postedBy:"ਪੋਸਟ ਕਰਨ ਵਾਲਾ", required:"ਸਾਰੀ ਲੋੜੀਂਦੀ ਜਾਣਕਾਰੀ ਭਰੋ।"
+},
+ur: {
+ loginTitle:"خوش آمدید!", loginSubtitle:"ایپ میں داخل ہونے کے لیے موبائل نمبر درج کریں اور OTP کی تصدیق کریں۔",
+ mobileLabel:"موبائل نمبر", generateOtp:"ڈیمو OTP بنائیں", otpLabel:"OTP درج کریں", verifyOtp:"OTP کی تصدیق کریں",
+ demoNotice:"صرف ڈیمو: OTP اسی اسکرین پر دکھایا جائے گا۔ حقیقی SMS تصدیق کے لیے محفوظ بیک اینڈ درکار ہے۔",
+ demoOTP:"آپ کا ڈیمو OTP:", invalidMobile:"درست 10 ہندسوں کا موبائل نمبر درج کریں۔", invalidOTP:"غلط OTP۔ دوبارہ کوشش کریں۔",
+ logout:"لاگ آؤٹ", home:"ہوم", findWorkers:"مزدور تلاش کریں", registerWorker:"مزدور کے طور پر رجسٹر کریں", jobsNear:"قریبی کام",
+ welcome:"اپنے قریب ہنرمند مزدور تلاش کریں", welcomeText:"پینٹر، بڑھئی، الیکٹریشن، درزی، پلمبر اور دیگر ہنرمندوں سے رابطہ کریں۔",
+ quickSearch:"فوری تلاش", searchLabel:"آپ کیا تلاش کر رہے ہیں؟", quickPlaceholder:"کام یا ہنر درج کریں",
+ locationLabel:"مقام", locationPlaceholder:"شہر یا علاقہ درج کریں", search:"تلاش کریں", searchWorkers:"مزدور تلاش کریں",
+ findDesc:"پیشہ، ہنر اور مقام کے مطابق مزدور تلاش کریں۔", registerDesc:"مزدور کا پروفائل اور QR کوڈ بنائیں۔",
+ createProfile:"پروفائل بنائیں", jobsDesc:"مقامی کام تلاش کریں یا کام پوسٹ کریں۔", viewJobs:"کام دیکھیں",
+ professionLabel:"پیشہ", allTypes:"تمام اقسام", nameSkillLabel:"نام یا ہنر",
+ nameSkillPlaceholder:"نام یا ہنر تلاش کریں", experienceLabel:"تجربہ (سال)", experiencePlaceholder:"مثال: 2",
+ showAll:"سب دکھائیں", fullNameLabel:"پورا نام", skillsLabel:"ہنر", skillsPlaceholder:"مثال: وائرنگ، مرمت",
+ descriptionLabel:"آپ کے کام کے بارے میں", descriptionPlaceholder:"اپنے کام اور تجربے کی وضاحت کریں",
+ jobSearchLabel:"کام کا نام یا ہنر", jobSearchPlaceholder:"مثال: الیکٹریشن", postJobTitle:"کام پوسٹ کریں",
+ jobTitleLabel:"کام کا نام", contactLabel:"رابطہ نمبر", postJob:"کام پوسٹ کریں", footerText:"ہنرمند مزدوروں کو مقامی مواقع سے جوڑنا۔",
+ noWorkers:"کوئی مزدور نہیں ملا۔", workersFound:"مزدور ملے:", noJobs:"کوئی کام نہیں ملا۔", jobsFound:"کام ملے:",
+ years:"سال", skills:"ہنر", phone:"فون", experience:"تجربہ", profileCreated:"مزدور کا پروفائل بن گیا!",
+ qrTitle:"آپ کا QR کوڈ", qrHelp:"مزدور کی معلومات دیکھنے کے لیے یہ QR کوڈ اسکین کریں۔",
+ jobPosted:"کام پوسٹ ہوگیا!", worker:"مزدور", postedBy:"پوسٹ کرنے والا", required:"تمام ضروری معلومات درج کریں۔"
+},
+or: {
+ loginTitle:"ସ୍ୱାଗତ!", loginSubtitle:"ଆପ୍‌ରେ ପ୍ରବେଶ କରିବାକୁ ମୋବାଇଲ୍ ନମ୍ବର ଦେଇ OTP ଯାଞ୍ଚ କରନ୍ତୁ।",
+ mobileLabel:"ମୋବାଇଲ୍ ନମ୍ବର", generateOtp:"ଡେମୋ OTP ତିଆରି କରନ୍ତୁ", otpLabel:"OTP ଦିଅନ୍ତୁ", verifyOtp:"OTP ଯାଞ୍ଚ କରନ୍ତୁ",
+ demoNotice:"କେବଳ ଡେମୋ: OTP ଏହି ପରଦାରେ ଦେଖାଯିବ। ପ୍ରକୃତ SMS ଯାଞ୍ଚ ପାଇଁ ସୁରକ୍ଷିତ ବ୍ୟାକେଣ୍ଡ ଆବଶ୍ୟକ।",
+ demoOTP:"ଆପଣଙ୍କ ଡେମୋ OTP:", invalidMobile:"ଠିକ୍ 10 ଅଙ୍କର ମୋବାଇଲ୍ ନମ୍ବର ଦିଅନ୍ତୁ।", invalidOTP:"ଭୁଲ OTP। ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।",
+ logout:"ଲଗ୍ ଆଉଟ୍", home:"ମୁଖ୍ୟ ପୃଷ୍ଠା", findWorkers:"କର୍ମୀ ଖୋଜନ୍ତୁ", registerWorker:"କର୍ମୀ ଭାବେ ପଞ୍ଜୀକରଣ", jobsNear:"ନିକଟସ୍ଥ କାମ",
+ welcome:"ଆପଣଙ୍କ ନିକଟରେ ଦକ୍ଷ କର୍ମୀ ଖୋଜନ୍ତୁ", welcomeText:"ପେଣ୍ଟର୍, କାଠମିସ୍ତ୍ରୀ, ଇଲେକ୍ଟ୍ରିସିଆନ୍, ଟେଲର୍ ଓ ପ୍ଲମ୍ବରଙ୍କ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ।",
+ quickSearch:"ଶୀଘ୍ର ଖୋଜ", searchLabel:"ଆପଣ କ'ଣ ଖୋଜୁଛନ୍ତି?", quickPlaceholder:"କାମ କିମ୍ବା ଦକ୍ଷତା ଦିଅନ୍ତୁ",
+ locationLabel:"ସ୍ଥାନ", locationPlaceholder:"ସହର କିମ୍ବା ଅଞ୍ଚଳ ଦିଅନ୍ତୁ", search:"ଖୋଜନ୍ତୁ", searchWorkers:"କର୍ମୀ ଖୋଜନ୍ତୁ",
+ findDesc:"ବୃତ୍ତି, ଦକ୍ଷତା ଓ ସ୍ଥାନ ଅନୁଯାୟୀ ଖୋଜନ୍ତୁ।", registerDesc:"କର୍ମୀ ପ୍ରୋଫାଇଲ୍ ଓ QR କୋଡ୍ ତିଆରି କରନ୍ତୁ।",
+ createProfile:"ପ୍ରୋଫାଇଲ୍ ତିଆରି କରନ୍ତୁ", jobsDesc:"ସ୍ଥାନୀୟ କାମ ଖୋଜନ୍ତୁ କିମ୍ବା କାମ ପୋଷ୍ଟ କରନ୍ତୁ।", viewJobs:"କାମ ଦେଖନ୍ତୁ",
+ professionLabel:"ବୃତ୍ତି", allTypes:"ସମସ୍ତ ପ୍ରକାର", nameSkillLabel:"ନାମ କିମ୍ବା ଦକ୍ଷତା",
+ nameSkillPlaceholder:"ନାମ କିମ୍ବା ଦକ୍ଷତା ଖୋଜନ୍ତୁ", experienceLabel:"ଅଭିଜ୍ଞତା (ବର୍ଷ)", experiencePlaceholder:"ଉଦାହରଣ: 2",
+ showAll:"ସମସ୍ତ ଦେଖାନ୍ତୁ", fullNameLabel:"ପୂର୍ଣ୍ଣ ନାମ", skillsLabel:"ଦକ୍ଷତା", skillsPlaceholder:"ଉଦାହରଣ: ୱାୟାରିଂ, ମରାମତି",
+ descriptionLabel:"ଆପଣଙ୍କ କାମ ବିଷୟରେ", descriptionPlaceholder:"ଆପଣଙ୍କ କାମ ଓ ଅଭିଜ୍ଞତା ବର୍ଣ୍ଣନା କରନ୍ତୁ",
+ jobSearchLabel:"କାମର ନାମ କିମ୍ବା ଦକ୍ଷତା", jobSearchPlaceholder:"ଉଦାହରଣ: ଇଲେକ୍ଟ୍ରିସିଆନ୍", postJobTitle:"କାମ ପୋଷ୍ଟ କରନ୍ତୁ",
+ jobTitleLabel:"କାମର ନାମ", contactLabel:"ଯୋଗାଯୋଗ ନମ୍ବର", postJob:"କାମ ପୋଷ୍ଟ କରନ୍ତୁ", footerText:"ଦକ୍ଷ କର୍ମୀଙ୍କୁ ସ୍ଥାନୀୟ ସୁଯୋଗ ସହ ଯୋଡ଼େ।",
+ noWorkers:"କର୍ମୀ ମିଳିଲେ ନାହିଁ।", workersFound:"କର୍ମୀ ମିଳିଲେ:", noJobs:"କାମ ମିଳିଲା ନାହିଁ।", jobsFound:"କାମ ମିଳିଲା:",
+ years:"ବର୍ଷ", skills:"ଦକ୍ଷତା", phone:"ଫୋନ୍", experience:"ଅଭିଜ୍ଞତା", profileCreated:"କର୍ମୀ ପ୍ରୋଫାଇଲ୍ ତିଆରି ହେଲା!",
+ qrTitle:"ଆପଣଙ୍କ QR କୋଡ୍", qrHelp:"କର୍ମୀଙ୍କ ସୂଚନା ଦେଖିବା ପାଇଁ QR କୋଡ୍ ସ୍କାନ୍ କରନ୍ତୁ।",
+ jobPosted:"କାମ ପୋଷ୍ଟ ହେଲା!", worker:"କର୍ମୀ", postedBy:"ପୋଷ୍ଟ କରିଛନ୍ତି", required:"ସମସ୍ତ ଆବଶ୍ୟକ ବିବରଣୀ ଭରନ୍ତୁ।"
+}
+};
+
+let currentLanguage = "en";
+
+function t(key) {
+    return (translations[currentLanguage] && translations[currentLanguage][key])
+        || translations.en[key]
+        || key;
+}
+
+function changeLanguage(language) {
+    currentLanguage = language;
+    document.documentElement.lang = language;
+
+    // Urdu uses right-to-left reading direction.
+    document.documentElement.dir = language === "ur" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-i18n]").forEach(function(element) {
+        const key = element.getAttribute("data-i18n");
+        element.textContent = t(key);
+    });
+
+    document.querySelectorAll("[data-placeholder]").forEach(function(element) {
+        element.placeholder = t(element.getAttribute("data-placeholder"));
+    });
+
+    renderWorkers();
+    renderJobs();
+
+    if (document.getElementById("workerCount")) {
+        document.getElementById("workerCount").textContent =
+            t("workersFound") + " " + getFilteredWorkers().length;
+    }
+}
+
+document.getElementById("languageSelect").addEventListener("change", function() {
+    changeLanguage(this.value);
+});
+
+/* ---------------- PAGE NAVIGATION ---------------- */
+
+function showPage(page) {
+    // Do not show any app page before OTP verification.
+    if (!isLoggedIn) {
+        app.classList.add("hidden");
+        loginScreen.classList.remove("hidden");
+        return;
+    }
+
+    document.querySelectorAll(".page").forEach(function(section) {
+        section.classList.add("hidden");
+    });
+
+    document.getElementById(page + "Page").classList.remove("hidden");
+
+    document.querySelectorAll("nav button[data-page]").forEach(function(button) {
+        button.classList.toggle("active", button.dataset.page === page);
+    });
+
+    if (page === "find") renderWorkers();
+    if (page === "jobs") renderJobs();
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ---------------- APP DATA ----------------
+   These records are stored only in memory.
+   Refreshing the page clears the demo data.
+*/
+
+let workers = [];
+let jobs = [];
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, function(character) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[character];
+    });
+}
+
+/* ---------------- WORKER REGISTRATION ---------------- */
+document.getElementById("registerWorkerForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    if (!isLoggedIn) return;
+    const body = {
+        name: document.getElementById("regName").value.trim(),
+        trade: document.getElementById("regProfession").value || document.getElementById("regSkills").value.trim(),
+        city: document.getElementById("regLocation").value.trim(),
+        phone: document.getElementById("regPhone").value.trim(),
+        claimedYears: Number(document.getElementById("regExperience").value),
+        pin: document.getElementById("regPin").value.trim()
+    };
+    try {
+        const data = await api("/register", { method: "POST", body: JSON.stringify(body) });
+        document.getElementById("registerMessage").textContent = "Worker account created. Backend supports trade, city and claimed experience; skills/description are not stored yet.";
+        document.getElementById("registerMessage").classList.remove("hidden");
+        const qrData = JSON.stringify({ name: body.name, profession: body.trade, location: body.city, experience: body.claimedYears, profile: location.origin + "/#/w/" + data.worker.id });
+        document.getElementById("newWorkerQR").innerHTML = `<h3 style="margin-top:22px;color:#17202a">Worker QR Code</h3><img class="qr-image" alt="Worker QR code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}">`;
+        this.reset();
+        document.getElementById("regPhone").value = verifiedMobile;
+        await renderWorkers();
+    } catch (err) {
+        document.getElementById("registerMessage").textContent = err.message;
+        document.getElementById("registerMessage").classList.remove("hidden");
+    }
+});
+
+/* ---------------- SEARCH WORKERS ---------------- */
+
+function getFilteredWorkers() {
+    const type = document.getElementById("workerType").value.toLowerCase();
+    const query = document.getElementById("workerQuery").value.trim().toLowerCase();
+    const locationValue = document.getElementById("workerLocation").value.trim().toLowerCase();
+    const experience = Number(document.getElementById("minExperience").value || 0);
+    return workers.filter(worker =>
+        (!type || worker.profession.toLowerCase().includes(type)) &&
+        (!query || worker.name.toLowerCase().includes(query) || worker.skills.toLowerCase().includes(query) || worker.profession.toLowerCase().includes(query)) &&
+        (!locationValue || worker.location.toLowerCase().includes(locationValue)) &&
+        worker.experience >= experience
+    );
+}
+document.getElementById("workerSearchForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    renderWorkers();
+});
+async function renderWorkers() {
+    const results = document.getElementById("workerResults");
+    if (!results) return;
+    try {
+        const type = document.getElementById("workerType").value.trim();
+        const query = document.getElementById("workerQuery").value.trim();
+        const city = document.getElementById("workerLocation").value.trim();
+        const params = new URLSearchParams();
+        if (type) params.set("trade", type);
+        if (query) params.set("q", query);
+        if (city) params.set("city", city);
+        const data = await api("/workers" + (params.toString() ? "?" + params.toString() : ""));
+        workers = data.map(w => ({
+            id: w.id, name: w.name, profession: w.trade || "", skills: "",
+            location: w.city || "", experience: Number(w.claimedYears || 0),
+            phone: "", description: `${w.stats?.level || "New"} · Trust score ${w.stats?.score || 0}/100`,
+            stats: w.stats
+        }));
+    } catch (err) {
+        results.innerHTML = `<div class="panel">${escapeHTML("Could not load workers: " + err.message)}</div>`;
+        return;
+    }
+    const filteredWorkers = getFilteredWorkers();
+    document.getElementById("workerCount").textContent = t("workersFound") + " " + filteredWorkers.length;
+    if (!filteredWorkers.length) {
+        results.innerHTML = `<div class="panel">${escapeHTML(t("noWorkers"))}</div>`;
+        return;
+    }
+    results.innerHTML = filteredWorkers.map(worker => `
+        <article class="worker-card">
+            <h3>${escapeHTML(worker.name)}</h3>
+            <p><strong>${escapeHTML(t("professionLabel"))}:</strong> ${escapeHTML(worker.profession)}</p>
+            <p><strong>${escapeHTML(t("locationLabel"))}:</strong> ${escapeHTML(worker.location)}</p>
+            <p><strong>${escapeHTML(t("experience"))}:</strong> ${escapeHTML(worker.experience)} ${escapeHTML(t("years"))}</p>
+            <p>${escapeHTML(worker.description)}</p>
+            <button onclick="showWorkerQR('${escapeHTML(worker.id)}')">${escapeHTML(t("qrTitle"))}</button>
+            <button onclick="viewWorkerProfile('${escapeHTML(worker.id)}')">View verified profile</button>
+            <div id="workerQR-${escapeHTML(worker.id)}"></div>
+            <div id="workerProfile-${escapeHTML(worker.id)}"></div>
+        </article>`).join("");
+}
+function showWorkerQR(id) {
+    const worker = workers.find(item => String(item.id) === String(id));
+    if (!worker) return;
+    const qrData = JSON.stringify({ name: worker.name, profession: worker.profession, location: worker.location, experience: worker.experience, profile: location.origin + "/#/w/" + worker.id });
+    document.getElementById("workerQR-" + id).innerHTML = `<img class="qr-image" alt="Worker QR code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}">`;
+}
+async function viewWorkerProfile(id) {
+    const target = document.getElementById("workerProfile-" + id);
+    try {
+        const w = await api("/workers/" + encodeURIComponent(id));
+        target.innerHTML = `<div class="panel"><h4>${escapeHTML(w.name)}</h4><p>${escapeHTML(w.trade)} · ${escapeHTML(w.city)}</p><p>Trust score: ${escapeHTML(w.stats.score)}/100 (${escapeHTML(w.stats.level)})</p><p>Verified jobs: ${escapeHTML(w.stats.verifiedJobs)} · Average rating: ${escapeHTML(w.stats.avgRating)}</p><button onclick="auditWorker('${escapeHTML(id)}')">Audit record</button><div id="audit-${escapeHTML(id)}"></div></div>`;
+    } catch (err) { target.textContent = err.message; }
+}
+async function auditWorker(id) {
+    const target = document.getElementById("audit-" + id);
+    try {
+        const a = await api("/workers/" + encodeURIComponent(id) + "/audit");
+        target.textContent = a.valid ? `Record valid. ${a.checked} verified jobs checked.` : `Record integrity issue at ${a.brokenAt}`;
+    } catch (err) { target.textContent = err.message; }
+}
+
+/* ---------------- QUICK SEARCH ---------------- */
+
+document.getElementById("quickSearchForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    document.getElementById("workerQuery").value = document.getElementById("quickQuery").value.trim();
+    document.getElementById("workerLocation").value = document.getElementById("quickLocation").value.trim();
+    showPage("find");
+    await renderWorkers();
+});
+
+/* ---------------- BACKEND JOB RECORDS ---------------- */
+document.getElementById("postJobForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+    if (!isLoggedIn) return;
+    const contact = document.getElementById("jobContact").value.trim();
+    if (!/^[0-9]{10}$/.test(contact)) {
+        alert(t("invalidMobile"));
+        return;
+    }
+    const body = {
+        title: document.getElementById("jobTitle").value.trim(),
+        city: document.getElementById("jobLocation").value.trim(),
+        clientPhone: contact,
+        clientName: "",
+        date: new Date().toISOString().slice(0, 10)
+    };
+    try {
+        const result = await api("/jobs", { method: "POST", body: JSON.stringify(body) });
+        document.getElementById("jobMessage").textContent = result.message + " (SMS is currently simulated by the backend.)";
+        document.getElementById("jobMessage").classList.remove("hidden");
+        this.reset();
+        await renderJobs();
+    } catch (err) {
+        document.getElementById("jobMessage").textContent = err.message;
+        document.getElementById("jobMessage").classList.remove("hidden");
+    }
+});
+document.getElementById("jobSearchForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    renderJobs();
+});
+async function renderJobs() {
+    const results = document.getElementById("jobResults");
+    if (!results) return;
+    if (!isLoggedIn) { results.innerHTML = `<div class="panel">Log in to view your job records.</div>`; return; }
+    try {
+        const data = await api("/me");
+        jobs = (data.jobs || []).map(j => ({
+            id: j.id, title: j.title, description: j.status === "VERIFIED" ? `Verified · Rating ${j.rating || "—"}/5` : "Awaiting client confirmation",
+            location: j.city || "", contact: j.clientPhone || "", postedBy: j.status || "PENDING", date: j.date || ""
+        }));
+    } catch (err) {
+        results.innerHTML = `<div class="panel">${escapeHTML("Could not load your job records: " + err.message)}</div>`;
+        return;
+    }
+    const query = document.getElementById("jobSearchQuery").value.trim().toLowerCase();
+    const city = document.getElementById("jobSearchLocation").value.trim().toLowerCase();
+    const filteredJobs = jobs.filter(job =>
+        (!query || job.title.toLowerCase().includes(query) || job.description.toLowerCase().includes(query)) &&
+        (!city || job.location.toLowerCase().includes(city))
+    );
+    if (!filteredJobs.length) {
+        results.innerHTML = `<div class="panel">${escapeHTML(t("noJobs"))}</div>`;
+        return;
+    }
+    results.innerHTML = filteredJobs.map(job => `
+        <article class="job-card">
+            <h3>${escapeHTML(job.title)}</h3>
+            <p><strong>Status:</strong> ${escapeHTML(job.postedBy)}</p>
+            <p><strong>${escapeHTML(t("locationLabel"))}:</strong> ${escapeHTML(job.location)}</p>
+            <p><strong>Date:</strong> ${escapeHTML(job.date)}</p>
+            <p>${escapeHTML(job.description)}</p>
+        </article>`).join("");
+}
+
+/* ---------------- STARTUP ---------------- */
+
+// Always start at the login screen; app pages remain hidden until OTP verification.
+app.classList.add("hidden");
+loginScreen.classList.remove("hidden");
+changeLanguage("en");
+if (authToken) {
+    api("/me").then(data => {
+        isLoggedIn = true;
+        verifiedMobile = data.worker.phone;
+        loginScreen.classList.add("hidden");
+        app.classList.remove("hidden");
+        document.getElementById("regPhone").value = verifiedMobile;
+        showPage("home");
+        renderWorkers();
+        renderJobs();
+    }).catch(() => {
+        sessionStorage.removeItem("desiKalakaarToken");
+        authToken = "";
+    });
+}
+</script>
+
+</body>
+</html>
